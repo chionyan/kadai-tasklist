@@ -37,7 +37,15 @@ class TasksController < ApplicationController
       flash.now[:danger] = 'タスクは更新されませんでした'
       render :edit
     end
-  end  
+  end
+  
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    
+    flash[:success] = 'タスクは正常に削除されました'
+    redirect_to tasks_url
+  end
   
   #Strong Parameter
   def task_params
