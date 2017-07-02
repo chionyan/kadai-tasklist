@@ -1,9 +1,18 @@
-<h1>タスク一覧</h1>
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.id, task_path(task) %> : <%= task.content %> / 状態：<%= task.status %></li>
-  <% end %>
-  
-  <%= link_to '新規タスクの投稿', new_task_path %>
+<% if logged_in? %>
+  <h1>タスク一覧</h1>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li><%= link_to task.id, task_path(task) %> : <%= task.content %> / 状態：<%= task.status %></li>
+    <% end %>
     
-</ul>
+    <%= link_to '新規タスクの投稿', new_task_path %>
+      
+  </ul>
+<% else %>
+  <div class="center jumbotron">
+    <din class="text-center">
+      <h1>Welcome to the Tasklist</h1>
+      <%= link_to 'Signup now!', signup_path, class: 'btn btn-lg btn-primary' %> 
+    </din>
+  </div>
+<% end %>
